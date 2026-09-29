@@ -1,0 +1,28 @@
+[build-system]
+requires = ["hatchling>=1.26,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "vdi-terminal"
+version = "0.1.0"
+description = "Local keyboard and OCR terminal bridge for browser-only virtual desktops"
+requires-python = ">=3.10"
+dependencies = [
+  "httpx>=0.27,<1",
+  "Pillow>=10,<13",
+  "playwright>=1.48,<2",
+  "prompt-toolkit>=3.0.48,<4",
+]
+
+[project.optional-dependencies]
+cpu = ["rapidocr-onnxruntime>=1.4,<2"]
+dev = ["pytest>=8,<9"]
+
+[project.scripts]
+vdi-terminal = "vdi_terminal.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/vdi_terminal"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
